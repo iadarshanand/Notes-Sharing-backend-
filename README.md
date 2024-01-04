@@ -16,72 +16,71 @@ This project implements a secure and scalable RESTful API for managing notes. Us
 
 The project is structured as follows:
 
-
 project-root/
 |-- index.js
 |-- routes/
-|   |-- authRoutes.js
-|   |-- noteRoutes.js
-|   |-- searchRoutes.js
+| |-- authRoutes.js
+| |-- noteRoutes.js
+| |-- searchRoutes.js
 |-- controllers/
-|   |-- authController.js
-|   |-- notesController.js
-|   |-- searchController.js  
+| |-- authController.js
+| |-- notesController.js
+| |-- searchController.js  
 |-- helper
-|   |-- authHelper.js 
+| |-- authHelper.js
 |-- middleware/
-|   |-- authMiddleware.js
+| |-- authMiddleware.js
 |-- models/
-|   |-- User.js
-|   |-- Note.js
+| |-- User.js
+| |-- Note.js
 |-- tests/
-|   |-- test.js
+| |-- test.js
 |-- .env
 |-- db.js
 |-- package.json
 |-- README.md
-
 
 ## Setup Instructions
 
 1. Clone the repository:
 
    bash
-   git clone https://github.com/your-username/notes-api.git
-   
+   git clone https://github.com/iadarshanand/Notes-Sharing-backend-.git
 
 2. Install dependencies:
 
    bash
    npm install
-   
 
 3. Create a `.env` file and set your environment variables:
 
-   plaintext
-   PORT=3000
-   JWT_SECRET=your_secret_key_here
-   
+   PORT=8000
+   MONGODB_URL=mongodb+srv://iadarshanand:Adarsh2022@cluster0.ytcwm.mongodb.net/noteSharing
+   JWT_SECRET=secret
 
 4. Start the server:
 
    bash
    npm start
-   
 
 5. Run tests:
 
    bash
    npm test
-   
+
+## Result of test
+
+![Request Example](https://res.cloudinary.com/dsibd3mda/image/upload/v1704396754/Screenshot_2024-01-05_010209_qftsui.png)
 
 ## API Endpoints
 
 - **Authentication Endpoints:**
+
   - `POST /api/auth/signup`: Create a new user account.
   - `POST /api/auth/login`: Log in to an existing user account and receive an access token.
 
 - **Note Endpoints:**
+
   - `GET /api/notes`: Get a list of all notes for the authenticated user.
   - `GET /api/notes/:id`: Get a note by ID for the authenticated user.
   - `POST /api/notes`: Create a new note for the authenticated user.
@@ -92,15 +91,8 @@ project-root/
 - **Search Functionality:**
   - `GET /api/search?q=:query`: Search for notes based on keywords for the authenticated user.
 
-## Evaluation Criteria
+## API Documentation
 
-The code will be evaluated on the following criteria:
+Explore the [Postman Documentation](https://www.postman.com/martian-trinity-976711/workspace/notes-sharing-backend) for detailed API information.
 
-1. **Correctness:** Does the code meet the requirements and work as expected?
-2. **Performance:** Does the code use rate limiting and request throttling to handle high traffic?
-3. **Security:** Does the code implement secure authentication and authorization mechanisms?
-4. **Quality:** Is the code well-organized, maintainable, and easy to understand?
-5. **Completeness:** Does the code include unit, integration, and end-to-end tests for all endpoints?
-6. **Search Functionality:** Does the code implement text indexing and search functionality to enable users to search for notes based on keywords?
-
-Feel free to reach out if you have any questions or need further assistance.
+![Request Example](https://res.cloudinary.com/dsibd3mda/image/upload/v1704396473/Screenshot_2024-01-05_005517_lghnpt.png)
