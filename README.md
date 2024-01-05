@@ -58,13 +58,12 @@ project-root/
    MONGODB_URL=mongodb+srv://iadarshanand:Adarsh2022@cluster0.ytcwm.mongodb.net/noteSharing
    JWT_SECRET=secret
 
-4. Start the server:
+4. To Start the server:
 
    npm start
 
-5. Run tests:
+5. To Run tests:
 
-   bash
    npm test
 
 ## Result of test
