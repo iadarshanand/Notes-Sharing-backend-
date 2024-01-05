@@ -234,7 +234,6 @@ describe("Authentication API", () => {
         username: `o${await generateRandomUsername(6)}`,
         password: "password",
       });
-      console.log(userResponse.body, "userResponse");
       const otherUserId = userResponse.body.user._id;
 
       // Share the note with the other user

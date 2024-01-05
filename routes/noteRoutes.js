@@ -14,6 +14,6 @@ noteRouter.get("/", isAuthenticated, getAllNotes);
 noteRouter.get("/:id", isAuthenticated, getNoteById);
 noteRouter.put("/:id", isAuthenticated, updateNote);
 noteRouter.delete("/:id", isAuthenticated, deleteNote);
-noteRouter.post("/:id/share", sharedNote);
+noteRouter.post("/:id/share", isAuthenticated, sharedNote);
 
 export default noteRouter;
