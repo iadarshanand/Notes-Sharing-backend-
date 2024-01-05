@@ -1,6 +1,6 @@
 // tests/setup.js
 
-let authToken, userId, noteId;
+let authToken, userId, noteId, username;
 
 export const getAuthToken = () => authToken;
 
@@ -19,4 +19,9 @@ export const getNoteId = () => noteId;
 export const setNoteId = (id) => {
   noteId = id;
 };
-// Other setup code can go here if needed
+
+export const getUserName = () => username;
+
+export const setUserName = (user) => {
+  username = user;
+};

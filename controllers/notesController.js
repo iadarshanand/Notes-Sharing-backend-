@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Note } from "../models/index.js";
+import { Note, User } from "../models/index.js";
 import { validateNote } from "../validators/index.js";
 
 //create Note
@@ -180,6 +180,11 @@ export const sharedNote = async (req, res) => {
         message: "Invalid Note ID format",
       });
     }
+    const user = await User.findById(sharedUserId);
+    if (!user)
+      return res
+        .status(400)
+        .json({ message: "User with sharedUserId doesn't exist" });
 
     //Note could be share by any authenticated user
     const note = await Note.findById(id);

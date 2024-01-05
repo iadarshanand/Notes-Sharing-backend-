@@ -8,6 +8,7 @@ This project implements a secure and scalable RESTful API for managing notes. Us
 - **MongoDB**: NoSQL database for storing notes and user data.
 - **Mongoose**: ODM library for MongoDB and Node.js.
 - **JWT (JSON Web Tokens)**: Authentication mechanism for securing API endpoints.
+- **Joi**: Library for validation in JavaScript, used for validating input data.
 - **JEST and SUPERTEST**: Testing libraries for writing and executing tests.
 - **Helmet**: Middleware for securing Express.js applications by setting various HTTP headers.
 - **Express Rate Limit**: Middleware for handling rate limiting and request throttling.
@@ -48,8 +49,7 @@ project-root/
    git clone https://github.com/iadarshanand/Notes-Sharing-backend-.git
 
 2. Install dependencies:
-
-   bash
+   npm init  
    npm install
 
 3. Create a `.env` file and set your environment variables:
@@ -60,7 +60,6 @@ project-root/
 
 4. Start the server:
 
-   bash
    npm start
 
 5. Run tests:
@@ -70,7 +69,7 @@ project-root/
 
 ## Result of test
 
-![Request Example](https://res.cloudinary.com/dsibd3mda/image/upload/v1704396754/Screenshot_2024-01-05_010209_qftsui.png)
+![Request Example](https://res.cloudinary.com/dsibd3mda/image/upload/v1704449111/Screenshot_2024-01-05_153317_t9n8jg.png)
 
 ## API Endpoints
 

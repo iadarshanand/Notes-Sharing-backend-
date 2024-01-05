@@ -6,8 +6,10 @@ import {
   SetUserId,
   getAuthToken,
   getNoteId,
+  getUserName,
   setAuthToken,
   setNoteId,
+  setUserName,
 } from "./setup.js";
 import { generateRandomUsername } from "../helper/randomGenerator.js";
 
@@ -27,6 +29,8 @@ describe("Authentication API", () => {
   describe("POST /register", () => {
     it("should register a new user with valid data", async () => {
       const username = generateRandomUsername(6);
+      setUserName(`t${username}`);
+
       const res = await request
         .post("/api/auth/signup")
         .send({ username: `t${username}`, password: "testpassword" });
@@ -59,7 +63,7 @@ describe("Authentication API", () => {
     it("should return an error for duplicate username during registration", async () => {
       const res = await request
         .post("/api/auth/signup")
-        .send({ username: "testuser", password: "testpassword" });
+        .send({ username: `${await getUserName()}`, password: "testpassword" });
 
       expect(res.status).toBe(400);
       expect(res.body.error).toBe("Username is already taken");
@@ -207,6 +211,64 @@ describe("Authentication API", () => {
       expect(response.status).toBe(200);
       expect(response.body.status).toBe(true);
       expect(response.body.message).toBe("Note deleted successfully");
+    });
+  });
+
+  //Shared Note
+  describe("POST /api/notes/:id/share", () => {
+    it("should share a note with another user", async () => {
+      // Create a note to be shared
+      const response = await request
+        .post("/api/notes")
+        .send({
+          title: "Test Note",
+          content: "This is a test note for sharing.",
+        })
+        .set("Authorization", `Bearer ${await getAuthToken()}`);
+
+      const noteId = response.body.note._id;
+
+      // Create another user to share the note with
+
+      const userResponse = await request.post("/api/auth/signup").send({
+        username: `o${await generateRandomUsername(6)}`,
+        password: "password",
+      });
+      console.log(userResponse.body, "userResponse");
+      const otherUserId = userResponse.body.user._id;
+
+      // Share the note with the other user
+      const shareResponse = await request
+        .post(`/api/notes/${noteId}/share`)
+        .set("Authorization", `Bearer ${await getAuthToken()}`) // Use the authToken of the note sharer to validate authenticated user
+        .send({ sharedUserId: otherUserId });
+
+      expect(shareResponse.status).toBe(200);
+      expect(shareResponse.body.status).toBe(true);
+      expect(shareResponse.body.message).toBe("Note shared successfully");
+    });
+  });
+
+  // Search Notes
+  describe("GET /api/search?q=:query", () => {
+    it("should search notes based on keywords", async () => {
+      // Create a note to be searched
+      const createNoteResponse = await request
+        .post("/api/notes")
+        .send({
+          title: "Test Note",
+          content: "This is a test note for searching.",
+        })
+        .set("Authorization", `Bearer ${await getAuthToken()}`);
+
+      // Search for notes based on keywords
+      const searchResponse = await request
+        .get(`/api/search?q=test`)
+        .set("Authorization", `Bearer ${await getAuthToken()}`);
+
+      expect(searchResponse.status).toBe(200);
+      expect(searchResponse.body.notes).toBeInstanceOf(Array);
+      expect(searchResponse.body.notes.length).toBeGreaterThan(0);
     });
   });
 });
